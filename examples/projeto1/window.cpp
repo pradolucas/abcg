@@ -79,7 +79,7 @@ void Window::onPaintUI() {
   abcg::OpenGLWindow::onPaintUI();
 
   {
-    auto const widgetSize{ImVec2(250, 100)};
+    auto const widgetSize{ImVec2(250, 200)};
     ImGui::SetNextWindowPos(ImVec2(m_viewportSize.x - widgetSize.x - 5,
                                    m_viewportSize.y - widgetSize.y - 5));
     ImGui::SetNextWindowSize(widgetSize);
@@ -99,6 +99,17 @@ void Window::onPaintUI() {
     ImGui::PushItemWidth(140);
     ImGui::SliderInt("#Triangles", &m_sides, 3, 30);
     ImGui::PopItemWidth();
+
+    // Edit vertex colors
+    auto colorEditFlags{ImGuiColorEditFlags_NoTooltip};
+    ImGui::PushItemWidth(215);
+    ImGui::ColorEdit3("v0", &m_colors.at(0).x, colorEditFlags);
+    ImGui::ColorEdit3("v1", &m_colors.at(1).x, colorEditFlags);
+    ImGui::PopItemWidth();
+
+    if (ImGui::Button("Generate Random", ImVec2(150, 30))) {
+      abcg::glClear(GL_COLOR_BUFFER_BIT);//TODO: generate random form w a random color
+    }
 
     ImGui::End();
   }
