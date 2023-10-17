@@ -41,9 +41,10 @@ void Window::onCreate() {
 }
 
 void Window::onPaint() {
-  if (m_timer.elapsed() < m_delay / 1000.0)
+  if (!generate)
     return;
-  m_timer.restart();
+
+  generate = false;
 
   // Create a regular polygon with number of sides in the range [3,20]
   // std::uniform_int_distribution intDist(3, 20);
@@ -91,11 +92,7 @@ void Window::onPaintUI() {
     if (ImGui::Button("Clear window", ImVec2(150, 30))) {
       abcg::glClear(GL_COLOR_BUFFER_BIT);
     }
-
-    ImGui::PushItemWidth(140);
-    ImGui::SliderInt("Delay", &m_delay, 0, 200, "%d ms");
-    ImGui::PopItemWidth();
-
+    
     ImGui::PushItemWidth(140);
     ImGui::SliderInt("#Triangles", &m_sides, 3, 30);
     ImGui::PopItemWidth();
@@ -108,11 +105,23 @@ void Window::onPaintUI() {
     ImGui::PopItemWidth();
 
     if (ImGui::Button("Generate Random", ImVec2(150, 30))) {
-      Window::generateRandom();//TODO: generate random form w a random color
+      abcg::glClear(GL_COLOR_BUFFER_BIT);
+      setGenerate();
+      Window::generateRandom();
+    }
+
+    if (ImGui::Button("Generate", ImVec2(150, 30))) {
+      abcg::glClear(GL_COLOR_BUFFER_BIT);
+      setGenerate();
+      Window::onPaint();
     }
 
     ImGui::End();
   }
+}
+
+void Window::setGenerate(){
+  generate = true;
 }
 
 void Window::onResize(glm::ivec2 const &size) {

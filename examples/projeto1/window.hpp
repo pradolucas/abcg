@@ -10,6 +10,7 @@ protected:
   void onCreate() override;
   void onPaint() override;
   void onPaintUI() override;
+  void setGenerate();
   void onResize(glm::ivec2 const &size) override;
   void onDestroy() override;
   void generateRandom();
@@ -26,6 +27,8 @@ private:
 
   std::array<glm::vec4, 2> m_colors{{{0.36f, 0.83f, 1.00f, 1},
                                      {1.00f, 0.69f, 0.30f, 1}}};
+
+  bool generate = false;
 
   abcg::Timer m_timer;
   int m_delay{200};
