@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
     window.setWindowSettings({
         .width = 600,
         .height = 600,
-        .title = "Regular Polygons",
+        .title = "Projeto 1",
     });
 
     app.run(window);

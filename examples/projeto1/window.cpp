@@ -55,8 +55,8 @@ void Window::onPaint() {
   abcg::glUseProgram(m_program);
 
   // Pick a random xy position from (-1,-1) to (1,1)
-  std::uniform_real_distribution rd1(-1.0f, 1.0f);
-  glm::vec2 const translation{rd1(m_randomEngine), rd1(m_randomEngine)};
+  // std::uniform_real_distribution rd1(-1.0f, 1.0f);
+  glm::vec2 const translation{0,0};
   auto const translationLocation{
       abcg::glGetUniformLocation(m_program, "translation")};
   abcg::glUniform2fv(translationLocation, 1, &translation.x);
