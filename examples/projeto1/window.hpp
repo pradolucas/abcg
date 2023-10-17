@@ -22,10 +22,14 @@ private:
   GLuint m_program{};
 
   std::default_random_engine m_randomEngine;
-
   abcg::Timer m_timer;
   int m_delay{200};
   int m_sides = 3;
+
+  
+  std::array<glm::vec4, 3> m_colors{{{0.36f, 0.83f, 1.00f, 1},
+                                     {0.63f, 0.00f, 0.61f, 1},
+                                     {1.00f, 0.69f, 0.30f, 1}}};
   
   void setupModel(int sides);
 };
