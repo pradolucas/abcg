@@ -102,8 +102,12 @@ void Window::onPaintUI() {
 
     // Edit vertex colors
     auto colorEditFlags{ImGuiColorEditFlags_NoTooltip};
+    // ImGuiColorEditFlags_NoPicker
     ImGui::PushItemWidth(215);
     ImGui::ColorEdit3("v0", &m_colors.at(0).x, colorEditFlags);
+    ImGui::PopItemWidth();
+
+    ImGui::PushItemWidth(215);
     ImGui::ColorEdit3("v1", &m_colors.at(1).x, colorEditFlags);
     ImGui::PopItemWidth();
 
