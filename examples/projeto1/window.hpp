@@ -25,8 +25,8 @@ private:
 
   abcg::Timer m_timer;
   int m_delay{200};
-  int m_growth{1};
-
+  int m_sides = 3;
+  
   void setupModel(int sides);
 };
 
