@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
         .width = 900,
         .height = 900,
         .showFPS = false,
-        .title = "Projeto 1",
+        .title = "Geometry generator",
     });
 
     app.run(window);

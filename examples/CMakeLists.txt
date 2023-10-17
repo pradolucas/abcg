@@ -1,3 +1,1 @@
-add_subdirectory(projeto1)
-# add_subdirectory(sierpinski)
-
+add_subdirectory(geometry_generator)
