@@ -30,6 +30,7 @@ private:
 
   bool generate = false;
   int m_sides = 3;
+  float m_scale = 0.125f;
 
   void setupModel(int sides);
 };
