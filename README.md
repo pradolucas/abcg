@@ -11,3 +11,7 @@ Projeto para a geração de formas personalizadas pelo usuário, as quais podem 
 
 # Build e configurações de ambiente 
 Disponível em: https://hbatagelo.github.io/cg/config.html
+
+# Página Web
+
+Disponível em: https://pradolucas.github.io/abcg/geometry_generator/
