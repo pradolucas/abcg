@@ -12,6 +12,7 @@ protected:
   void onPaintUI() override;
   void onResize(glm::ivec2 const &size) override;
   void onDestroy() override;
+  void generateRandom();
 
 private:
   glm::ivec2 m_viewportSize{};

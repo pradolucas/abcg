@@ -108,7 +108,7 @@ void Window::onPaintUI() {
     ImGui::PopItemWidth();
 
     if (ImGui::Button("Generate Random", ImVec2(150, 30))) {
-      abcg::glClear(GL_COLOR_BUFFER_BIT);//TODO: generate random form w a random color
+      Window::generateRandom();//TODO: generate random form w a random color
     }
 
     ImGui::End();
@@ -128,39 +128,46 @@ void Window::onDestroy() {
   abcg::glDeleteVertexArrays(1, &m_VAO);
 }
 
+void Window::generateRandom(){
+  // Select random colors for the radial gradient
+  std::uniform_real_distribution rd(0.0f, 1.0f);
+  glm::vec4 const color1{rd(m_randomEngine), rd(m_randomEngine),
+                         rd(m_randomEngine), 1};
+  glm::vec4 const color2{rd(m_randomEngine), rd(m_randomEngine),
+                         rd(m_randomEngine), 1};
+
+  m_colors = {color1, color2};
+
+  // // Minimum number of sides is 3
+  // Create a regular polygon with number of sides in the range [3,20]
+  std::uniform_int_distribution intDist(3, 20);
+  auto sides{intDist(m_randomEngine)};
+  m_sides = std::max(3, sides);
+}
+
 void Window::setupModel(int sides) {
   // Release previous resources, if any
   abcg::glDeleteBuffers(1, &m_VBOPositions);
   abcg::glDeleteBuffers(1, &m_VBOColors);
   abcg::glDeleteVertexArrays(1, &m_VAO);
 
-  // Select random colors for the radial gradient
-  std::uniform_real_distribution rd(0.0f, 1.0f);
-  glm::vec3 const color1{rd(m_randomEngine), rd(m_randomEngine),
-                         rd(m_randomEngine)};
-  glm::vec3 const color2{rd(m_randomEngine), rd(m_randomEngine),
-                         rd(m_randomEngine)};
-
-  // // Minimum number of sides is 3
-  // sides = std::max(3, sides);
-
   std::vector<glm::vec2> positions;
   std::vector<glm::vec3> colors;
 
   // Polygon center
   positions.emplace_back(0, 0);
-  colors.push_back(color1);
+  colors.push_back(m_colors.at(0));
 
   // Border vertices
   auto const step{M_PI * 2 / sides};
   for (auto const angle : iter::range(0.0, M_PI * 2, step)) {
     positions.emplace_back(std::cos(angle), std::sin(angle));
-    colors.push_back(color2);
+    colors.push_back(m_colors.at(1));
   }
 
   // Duplicate second vertex
   positions.push_back(positions.at(1));
-  colors.push_back(color2);
+  colors.push_back(m_colors.at(1));
 
   // Generate VBO of positions
   abcg::glGenBuffers(1, &m_VBOPositions);
