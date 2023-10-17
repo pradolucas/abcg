@@ -9,6 +9,7 @@ int main(int argc, char **argv) {
     window.setWindowSettings({
         .width = 900,
         .height = 900,
+        .showFPS = false,
         .title = "Projeto 1",
     });
 
