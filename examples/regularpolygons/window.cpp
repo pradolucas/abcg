@@ -36,6 +36,12 @@ void Window::onCreate() {
   abcg::glClearColor(0, 0, 0, 1);
   abcg::glClear(GL_COLOR_BUFFER_BIT);
 
+  // #if !defined(__EMSCRIPTEN__)
+  //   abcg::glEnable(GL_PROGRAM_POINT_SIZE);
+  //   abcg::glGetFloatv(GL_POINT_SIZE_RANGE, sizes.data());
+  // #else
+  //   abcg::glGetFloatv(GL_ALIASED_POINT_SIZE_RANGE, sizes.data());
+  // #endif
   m_randomEngine.seed(
       std::chrono::steady_clock::now().time_since_epoch().count());
 }
@@ -46,8 +52,9 @@ void Window::onPaint() {
   m_timer.restart();
 
   // Create a regular polygon with number of sides in the range [3,20]
-  std::uniform_int_distribution intDist(3, 20);
-  auto const sides{intDist(m_randomEngine)};
+  // std::uniform_int_distribution intDist(3, 20);
+  // auto const sides{intDist(m_randomEngine)};
+  auto sides = 30;
   setupModel(sides);
 
   abcg::glViewport(0, 0, m_viewportSize.x, m_viewportSize.y);
@@ -62,8 +69,9 @@ void Window::onPaint() {
   abcg::glUniform2fv(translationLocation, 1, &translation.x);
 
   // Pick a random scale factor (1% to 25%)
-  std::uniform_real_distribution rd2(0.01f, 0.25f);
-  auto const scale{rd2(m_randomEngine)};
+  // std::uniform_real_distribution rd2(0.01f, 0.25f);
+  // auto const scale{rd2(m_randomEngine)};
+  auto const scale{1};
   auto const scaleLocation{abcg::glGetUniformLocation(m_program, "scale")};
   abcg::glUniform1f(scaleLocation, scale);
 
@@ -137,11 +145,12 @@ void Window::setupModel(int sides) {
   colors.push_back(color1);
 
   // Border vertices
-  auto const step{M_PI * 2 / sides};
-  for (auto const angle : iter::range(0.0, M_PI * 2, step)) {
-    positions.emplace_back(std::cos(angle), std::sin(angle));
+  auto const step{M_PI * 2 / sides };
+  for (auto const angle : iter::range(0.0, M_PI, step)) {
+    positions.emplace_back(std::cos(angle)*m_growth, std::sin(angle)*m_growth);
     colors.push_back(color2);
   }
+  // m_growth++;
 
   // Duplicate second vertex
   positions.push_back(positions.at(1));
