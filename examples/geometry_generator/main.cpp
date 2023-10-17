@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
     window.setWindowSettings({
         .width = 900,
         .height = 900,
-        .title = "Projeto 1",
+        .title = "Geometry generator",
     });
 
     app.run(window);
