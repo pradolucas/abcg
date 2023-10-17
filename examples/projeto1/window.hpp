@@ -25,15 +25,12 @@ private:
 
   std::default_random_engine m_randomEngine;
 
-  std::array<glm::vec4, 2> m_colors{{{0.36f, 0.83f, 1.00f, 1},
-                                     {1.00f, 0.69f, 0.30f, 1}}};
+  std::array<glm::vec4, 2> m_colors{
+      {{0.36f, 0.83f, 1.00f, 1}, {1.00f, 0.69f, 0.30f, 1}}};
 
   bool generate = false;
-
-  abcg::Timer m_timer;
-  int m_delay{200};
   int m_sides = 3;
-  
+
   void setupModel(int sides);
 };
 

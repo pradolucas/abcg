@@ -46,18 +46,13 @@ void Window::onPaint() {
 
   generate = false;
 
-  // Create a regular polygon with number of sides in the range [3,20]
-  // std::uniform_int_distribution intDist(3, 20);
-  // auto const sides{intDist(m_randomEngine)};
   setupModel(m_sides);
 
   abcg::glViewport(0, 0, m_viewportSize.x, m_viewportSize.y);
 
   abcg::glUseProgram(m_program);
 
-  // Pick a random xy position from (-1,-1) to (1,1)
-  // std::uniform_real_distribution rd1(-1.0f, 1.0f);
-  glm::vec2 const translation{0,0};
+  glm::vec2 const translation{0, 0};
   auto const translationLocation{
       abcg::glGetUniformLocation(m_program, "translation")};
   abcg::glUniform2fv(translationLocation, 1, &translation.x);
@@ -92,7 +87,7 @@ void Window::onPaintUI() {
     if (ImGui::Button("Clear window", ImVec2(150, 30))) {
       abcg::glClear(GL_COLOR_BUFFER_BIT);
     }
-    
+
     ImGui::PushItemWidth(140);
     ImGui::SliderInt("#Triangles", &m_sides, 3, 30);
     ImGui::PopItemWidth();
@@ -124,9 +119,7 @@ void Window::onPaintUI() {
   }
 }
 
-void Window::setGenerate(){
-  generate = true;
-}
+void Window::setGenerate() { generate = true; }
 
 void Window::onResize(glm::ivec2 const &size) {
   m_viewportSize = size;
@@ -141,7 +134,7 @@ void Window::onDestroy() {
   abcg::glDeleteVertexArrays(1, &m_VAO);
 }
 
-void Window::generateRandom(){
+void Window::generateRandom() {
   // Select random colors for the radial gradient
   std::uniform_real_distribution rd(0.0f, 1.0f);
   glm::vec4 const color1{rd(m_randomEngine), rd(m_randomEngine),
@@ -153,7 +146,7 @@ void Window::generateRandom(){
 
   // // Minimum number of sides is 3
   // Create a regular polygon with number of sides in the range [3,20]
-  std::uniform_int_distribution intDist(3, 20);
+  std::uniform_int_distribution intDist(3, 30);
   auto sides{intDist(m_randomEngine)};
   m_sides = std::max(3, sides);
 }
