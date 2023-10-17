@@ -1,2 +1,2 @@
-add_subdirectory(regularpolygons)
+add_subdirectory(projeto1)
 # add_subdirectory(sierpinski)
