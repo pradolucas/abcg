@@ -72,9 +72,13 @@ void Window::onPaintUI() {
   abcg::OpenGLWindow::onPaintUI();
 
   {
-    auto const widgetSize{ImVec2(250, 200)};
-    ImGui::SetNextWindowPos(ImVec2(0,
-                                   0));
+    auto const widgetSize{ImVec2(250, 220)};
+    // Melhor disposição para wasm 
+    ImGui::SetNextWindowPos(ImVec2(m_viewportSize.x - widgetSize.x + 50,
+                                   m_viewportSize.y - widgetSize.y + 50));
+    // ImGui::SetNextWindowPos(ImVec2(m_viewportSize.x - widgetSize.x - 5,
+    //                                m_viewportSize.y - widgetSize.y - 5));
+
     ImGui::SetNextWindowSize(widgetSize);
     auto const windowFlags{ImGuiWindowFlags_NoResize |
                            ImGuiWindowFlags_NoCollapse |
@@ -96,12 +100,12 @@ void Window::onPaintUI() {
     // Edit vertex colors
     auto colorEditFlags{ImGuiColorEditFlags_NoTooltip};
     // ImGuiColorEditFlags_NoPicker
-    ImGui::PushItemWidth(215);
-    ImGui::ColorEdit3("V1", &m_colors.at(0).x, colorEditFlags);
+    ImGui::PushItemWidth(140);
+    ImGui::ColorEdit3("Color In", &m_colors.at(0).x, colorEditFlags);
     ImGui::PopItemWidth();
 
-    ImGui::PushItemWidth(215);
-    ImGui::ColorEdit3("Cor ext", &m_colors.at(1).x, colorEditFlags);
+    ImGui::PushItemWidth(140);
+    ImGui::ColorEdit3("Color Ex", &m_colors.at(1).x, colorEditFlags);
     ImGui::PopItemWidth();
 
     if (ImGui::Button("Generate Random", ImVec2(150, 30))) {
