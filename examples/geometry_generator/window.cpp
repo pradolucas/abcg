@@ -72,12 +72,12 @@ void Window::onPaintUI() {
   abcg::OpenGLWindow::onPaintUI();
 
   {
-    auto const widgetSize{ImVec2(250, 220)};
+    auto const widgetSize{ImVec2(225, 220)};
     // Melhor disposição para wasm 
-    ImGui::SetNextWindowPos(ImVec2(m_viewportSize.x - widgetSize.x + 50,
-                                   m_viewportSize.y - widgetSize.y + 50));
-    // ImGui::SetNextWindowPos(ImVec2(m_viewportSize.x - widgetSize.x - 5,
-    //                                m_viewportSize.y - widgetSize.y - 5));
+    // ImGui::SetNextWindowPos(ImVec2(m_viewportSize.x - widgetSize.x + 50,
+    //                                m_viewportSize.y - widgetSize.y + 50));
+    ImGui::SetNextWindowPos(ImVec2(m_viewportSize.x - widgetSize.x - 5,
+                                   m_viewportSize.y - widgetSize.y - 5));
 
     ImGui::SetNextWindowSize(widgetSize);
     auto const windowFlags{ImGuiWindowFlags_NoResize |
