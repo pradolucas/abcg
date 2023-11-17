@@ -5,12 +5,11 @@ int main(int argc, char **argv) {
     abcg::Application app(argc, argv);
 
     Window window;
-    window.setOpenGLSettings({.samples = 2, .doubleBuffering = false});
+    window.setOpenGLSettings({.samples = 4});
     window.setWindowSettings({
-        .width = 900,
-        .height = 900,
-        .showFPS = false,
-        .title = "Geometry generator",
+        .width = 600,
+        .height = 600,
+        .title = "Cube",
     });
 
     app.run(window);

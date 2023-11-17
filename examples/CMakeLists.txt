@@ -1,1 +1,3 @@
-add_subdirectory(geometry_generator)
+add_subdirectory(cube_trail)
+
+
