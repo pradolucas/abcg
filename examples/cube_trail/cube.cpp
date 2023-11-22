@@ -372,28 +372,58 @@ void Cube::translate() {
 
   case PlaneFace::C_LEFT:
     switch (m_orientation) {
-    case Orientation::DOWN:
+    // case Orientation::DOWN:
+    //   m_position.y -= m_scale;
+    //   if (m_border) {
+    //     m_position.x += m_scale;
+    //     m_planeface = PlaneFace::C_BOTTOM;
+    //   }
+    //   break;
+    // case Orientation::UP:
+    //   m_position.y += m_scale;
+    //   if (m_border) {
+    //     m_position.x += m_scale;
+    //     m_planeface = PlaneFace::C_UPPER;
+    //   }
+    //   break;
+    // case Orientation::LEFT:
+    //   m_position.z -= m_scale;
+    //   if (m_border) {
+    //     m_position.x += m_scale;
+    //     m_planeface = PlaneFace::C_REAR;
+    //   }
+    //   break;
+    // case Orientation::RIGHT:
+    //   m_position.z += m_scale;
+    //   if (m_border) {
+    //     m_position.x += m_scale;
+    //     m_planeface = PlaneFace::C_FRONT;
+    //   }
+    //   break;
+    // }
+    // break;
+    case Orientation::LEFT:
       m_position.y -= m_scale;
       if (m_border) {
         m_position.x += m_scale;
         m_planeface = PlaneFace::C_BOTTOM;
       }
       break;
-    case Orientation::UP:
+    case Orientation::RIGHT:
       m_position.y += m_scale;
       if (m_border) {
         m_position.x += m_scale;
         m_planeface = PlaneFace::C_UPPER;
       }
       break;
-    case Orientation::LEFT:
+    case Orientation::UP:
       m_position.z -= m_scale;
       if (m_border) {
         m_position.x += m_scale;
         m_planeface = PlaneFace::C_REAR;
       }
       break;
-    case Orientation::RIGHT:
+    case Orientation::DOWN:
       m_position.z += m_scale;
       if (m_border) {
         m_position.x += m_scale;
@@ -471,8 +501,12 @@ void Cube::moveDown() {
       if (m_position.y + m_scale >= -0.00001)
         m_border = true;
       break;
+    // case PlaneFace::C_LEFT:
+    //   if (m_position.y - m_scale < -(3 * m_maxPos))
+    //     m_border = true;
+    //   break;
     case PlaneFace::C_LEFT:
-      if (m_position.y - m_scale < -(3 * m_maxPos))
+      if (m_position.z + m_scale > m_maxPos)
         m_border = true;
       break;
     case PlaneFace::C_BOTTOM:
@@ -511,8 +545,12 @@ void Cube::moveUp() {
       if (m_position.y - m_scale < -(3 * m_maxPos))
         m_border = true;
       break;
+    // case PlaneFace::C_LEFT:
+    //   if (m_position.y + m_scale >= -0.00001)
+    //     m_border = true;
+    //   break;
     case PlaneFace::C_LEFT:
-      if (m_position.y + m_scale >= -0.00001)
+      if (m_position.z - m_scale < -m_maxPos)
         m_border = true;
       break;
     case PlaneFace::C_BOTTOM:
@@ -550,8 +588,12 @@ void Cube::moveLeft() {
       if (m_position.x - m_scale < -m_maxPos)
         m_border = true;
       break;
+    // case PlaneFace::C_LEFT:
+    //   if (m_position.z - m_scale < -m_maxPos)
+    //     m_border = true;
+    //   break;
     case PlaneFace::C_LEFT:
-      if (m_position.z - m_scale < -m_maxPos)
+      if (m_position.y - m_scale < -(3 * m_maxPos))
         m_border = true;
       break;
     case PlaneFace::C_BOTTOM:
@@ -590,8 +632,12 @@ void Cube::moveRight() {
       if (m_position.x + m_scale > m_maxPos)
         m_border = true;
       break;
+    // case PlaneFace::C_LEFT:
+    //   if (m_position.z + m_scale > m_maxPos)
+    //     m_border = true;
+    //   break;
     case PlaneFace::C_LEFT:
-      if (m_position.z + m_scale > m_maxPos)
+      if (m_position.y + m_scale >= -0.00001)
         m_border = true;
       break;
     case PlaneFace::C_BOTTOM:
