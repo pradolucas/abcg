@@ -52,8 +52,7 @@ private:
   void move(float deltaTime);
   void translate();
   void resetAnimation();
-  void increaseAngle(float inc);
-
+  
 };
 
 #endif

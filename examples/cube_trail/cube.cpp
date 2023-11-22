@@ -243,7 +243,6 @@ void Cube::translate() {
     switch (m_orientation) {
     case Orientation::DOWN:
       m_position.y -= m_scale;
-      // TODO
       if (m_border) {
         m_position.z -= m_scale;
         m_planeface = PlaneFace::C_BOTTOM;
@@ -262,11 +261,9 @@ void Cube::translate() {
         m_position.z -= m_scale;
         m_planeface = PlaneFace::C_LEFT;
       }
-      // TODO
       break;
     case Orientation::RIGHT:
       m_position.x += m_scale;
-      // TODO
       if (m_border) {
         m_position.z -= m_scale;
         m_planeface = PlaneFace::C_RIGHT;
@@ -277,37 +274,66 @@ void Cube::translate() {
 
   case PlaneFace::C_RIGHT:
     switch (m_orientation) {
-    case Orientation::DOWN:
+    // case Orientation::DOWN:
+    //   m_position.y -= m_scale;
+    //   // TODO
+    //   if (m_border) {
+    //     m_position.x -= m_scale;
+    //     m_planeface = PlaneFace::C_BOTTOM;
+    //   }
+    //   break;
+    // case Orientation::UP:
+    //   m_position.y += m_scale;
+    //   if (m_border) {
+    //     m_position.x -= m_scale;
+    //     m_planeface = PlaneFace::C_UPPER;
+    //   }
+    //   break;
+    // case Orientation::LEFT:
+    //   m_position.z += m_scale;
+    //   // TODO
+    //   if (m_border) {
+    //     m_position.x -= m_scale;
+    //     m_planeface = PlaneFace::C_FRONT;
+    //   }
+    //   break;
+    // case Orientation::RIGHT:
+    //   m_position.z -= m_scale;
+    //   // TODO
+    //   if (m_border) {
+    //     m_position.x -= m_scale;
+    //     m_planeface = PlaneFace::C_REAR;
+    //   }
+    //   break;
+    case Orientation::RIGHT:
       m_position.y -= m_scale;
-      // TODO
       if (m_border) {
         m_position.x -= m_scale;
         m_planeface = PlaneFace::C_BOTTOM;
       }
       break;
-    case Orientation::UP:
+    case Orientation::LEFT:
       m_position.y += m_scale;
       if (m_border) {
         m_position.x -= m_scale;
         m_planeface = PlaneFace::C_UPPER;
       }
       break;
-    case Orientation::LEFT:
+    case Orientation::DOWN:
       m_position.z += m_scale;
-      // TODO
       if (m_border) {
         m_position.x -= m_scale;
         m_planeface = PlaneFace::C_FRONT;
       }
       break;
-    case Orientation::RIGHT:
+    case Orientation::UP:
       m_position.z -= m_scale;
-      // TODO
       if (m_border) {
         m_position.x -= m_scale;
         m_planeface = PlaneFace::C_REAR;
       }
       break;
+    
     }
     break;
 
@@ -315,7 +341,6 @@ void Cube::translate() {
     switch (m_orientation) {
     case Orientation::DOWN:
       m_position.y += m_scale;
-      // TODO
       if (m_border) {
         m_position.z += m_scale;
         m_planeface = PlaneFace::C_UPPER;
@@ -330,7 +355,6 @@ void Cube::translate() {
       break;
     case Orientation::LEFT:
       m_position.x -= m_scale;
-      // TODO
       if (m_border) {
         m_position.z += m_scale;
         m_planeface = PlaneFace::C_LEFT;
@@ -338,7 +362,6 @@ void Cube::translate() {
       break;
     case Orientation::RIGHT:
       m_position.x += m_scale;
-      // TODO
       if (m_border) {
         m_position.z += m_scale;
         m_planeface = PlaneFace::C_RIGHT;
@@ -351,7 +374,6 @@ void Cube::translate() {
     switch (m_orientation) {
     case Orientation::DOWN:
       m_position.y -= m_scale;
-      // TODO
       if (m_border) {
         m_position.x += m_scale;
         m_planeface = PlaneFace::C_BOTTOM;
@@ -366,7 +388,6 @@ void Cube::translate() {
       break;
     case Orientation::LEFT:
       m_position.z -= m_scale;
-      // TODO
       if (m_border) {
         m_position.x += m_scale;
         m_planeface = PlaneFace::C_REAR;
@@ -374,7 +395,6 @@ void Cube::translate() {
       break;
     case Orientation::RIGHT:
       m_position.z += m_scale;
-      // TODO
       if (m_border) {
         m_position.x += m_scale;
         m_planeface = PlaneFace::C_FRONT;
@@ -387,7 +407,6 @@ void Cube::translate() {
     switch (m_orientation) {
     case Orientation::DOWN:
       m_position.z += m_scale;
-      // TODO
       if (m_border) {
         m_position.y += m_scale;
         m_planeface = PlaneFace::C_FRONT;
@@ -402,7 +421,6 @@ void Cube::translate() {
       break;
     case Orientation::LEFT:
       m_position.x -= m_scale;
-      // TODO
       if (m_border) {
         m_position.y += m_scale;
         m_planeface = PlaneFace::C_LEFT;
@@ -410,7 +428,6 @@ void Cube::translate() {
       break;
     case Orientation::RIGHT:
       m_position.x += m_scale;
-      // TODO
       if (m_border) {
         m_position.y += m_scale;
         m_planeface = PlaneFace::C_RIGHT;
@@ -439,13 +456,15 @@ void Cube::moveDown() {
         m_border = true;
       break;
     case PlaneFace::C_FRONT:
-      // TODO
       if (m_position.y - m_scale < -(3 * m_maxPos))
         m_border = true;
       break;
+    // case PlaneFace::C_RIGHT:
+    //   if (m_position.y - m_scale < -(3 * m_maxPos))
+    //     m_border = true;
+    //   break;
     case PlaneFace::C_RIGHT:
-      // TODO
-      if (m_position.y - m_scale < -(3 * m_maxPos))
+      if (m_position.z + m_scale > m_maxPos)
         m_border = true;
       break;
     case PlaneFace::C_REAR:
@@ -453,12 +472,10 @@ void Cube::moveDown() {
         m_border = true;
       break;
     case PlaneFace::C_LEFT:
-      // TODO
       if (m_position.y - m_scale < -(3 * m_maxPos))
         m_border = true;
       break;
     case PlaneFace::C_BOTTOM:
-      // TODO
       if (m_position.z + m_scale > m_maxPos)
         m_border = true;
       break;
@@ -470,13 +487,6 @@ void Cube::moveDown() {
 }
 
 void Cube::moveUp() {
-  // std::cout << "x,y,z: " << m_position.x << " " << m_position.y << " "
-  //           << m_position.z << " " << std::endl;
-  // std::cout << "m_scale: " << m_scale << std::endl;
-  // std::cout << "plane: " << gsl::narrow_cast<int>(m_planeface) << std::endl;
-  // std::cout << "m_border: " << m_border << std::endl;
-  // std::cout << "\n" << std::endl;
-
   if (m_isMoving)
     return;
   else {
@@ -489,12 +499,15 @@ void Cube::moveUp() {
       if (m_position.y + m_scale >= -0.00001)
         m_border = true;
       break;
+    // case PlaneFace::C_RIGHT:
+    //   if (m_position.y + m_scale >= -0.00001)
+    //     m_border = true;
+    //   break;
     case PlaneFace::C_RIGHT:
-      if (m_position.y + m_scale >= -0.00001)
+      if (m_position.z - m_scale < -m_maxPos)
         m_border = true;
       break;
     case PlaneFace::C_REAR:
-      // TODO
       if (m_position.y - m_scale < -(3 * m_maxPos))
         m_border = true;
       break;
@@ -503,7 +516,6 @@ void Cube::moveUp() {
         m_border = true;
       break;
     case PlaneFace::C_BOTTOM:
-      // TODO
       if (m_position.z - m_scale < -m_maxPos)
         m_border = true;
       break;
@@ -514,13 +526,6 @@ void Cube::moveUp() {
 }
 
 void Cube::moveLeft() {
-  // std::cout << "x,y,z: " << m_position.x << " " << m_position.y << " "
-  //           << m_position.z << " " << std::endl;
-  // std::cout << "m_scale: " << m_scale << std::endl;
-  // std::cout << "plane: " << gsl::narrow_cast<int>(m_planeface) << std::endl;
-  // std::cout << "m_border: " << m_border << std::endl;
-  // std::cout << "\n" << std::endl;
-
   if (m_isMoving)
     return;
   else {
@@ -533,8 +538,12 @@ void Cube::moveLeft() {
       if (m_position.x - m_scale < -m_maxPos)
         m_border = true;
       break;
+    // case PlaneFace::C_RIGHT:
+    //   if (m_position.z + m_scale > m_maxPos)
+    //     m_border = true;
+    //   break;
     case PlaneFace::C_RIGHT:
-      if (m_position.z + m_scale > m_maxPos)
+      if (m_position.y + m_scale >= -0.00001)
         m_border = true;
       break;
     case PlaneFace::C_REAR:
@@ -546,7 +555,6 @@ void Cube::moveLeft() {
         m_border = true;
       break;
     case PlaneFace::C_BOTTOM:
-      // TODO
       if (m_position.x - m_scale < -m_maxPos)
         m_border = true;
       break;
@@ -558,13 +566,6 @@ void Cube::moveLeft() {
 }
 
 void Cube::moveRight() {
-  // std::cout << "x,y,z: " << m_position.x << " " << m_position.y << " "
-  //           << m_position.z << " " << std::endl;
-  // std::cout << "m_scale: " << m_scale << std::endl;
-  // std::cout << "plane: " << gsl::narrow_cast<int>(m_planeface) << std::endl;
-  // std::cout << "m_border: " << m_border << std::endl;
-  // std::cout << "\n" << std::endl;
-
   if (m_isMoving)
     return;
   else {
@@ -577,8 +578,12 @@ void Cube::moveRight() {
       if (m_position.x + m_scale > m_maxPos)
         m_border = true;
       break;
+    // case PlaneFace::C_RIGHT:
+    //   if (m_position.z - m_scale < -m_maxPos)
+    //     m_border = true;
+    //   break;
     case PlaneFace::C_RIGHT:
-      if (m_position.z - m_scale < -m_maxPos)
+      if (m_position.y - m_scale < -(3 * m_maxPos))
         m_border = true;
       break;
     case PlaneFace::C_REAR:
@@ -590,7 +595,6 @@ void Cube::moveRight() {
         m_border = true;
       break;
     case PlaneFace::C_BOTTOM:
-      // TODO
       if (m_position.x + m_scale > m_maxPos)
         m_border = true;
       break;
