@@ -172,19 +172,22 @@ void Cube::move(float deltaTime) {
     }
     else if(m_planeface == PlaneFace::C_RIGHT) {
       m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(270.0f), glm::vec3(0.0f, 0.0f, 1.0f)); 
-      // m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)); 
-      // m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(m_scale / 2, -m_scale / 2, 0 )); 
-      // m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f)); // Após a rotação executada na linha acima, o sentido anti-horário do eixo x deve apontar para a direção q ocorre o translado
-      // m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(-m_scale / 2, m_scale / 2, 0)); 
       m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); 
       m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(-m_scale / 2, 0, m_scale / 2)); 
-      m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(0.0f, -1.0f, 0.0f)); // Após a rotação executada na linha 166, o eixo x deve apontar para a direção q ocorre o translado
+      m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(0.0f, -1.0f, 0.0f));
       m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(m_scale / 2, 0, -m_scale / 2));
+    }
+    else if(m_planeface == PlaneFace::C_REAR) {
+      m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(270.0f), glm::vec3(1.0f, 0.0f, 0.0f)); 
+      m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * -90.0f), glm::vec3(0.0f, 0.0f, 1.0f)); 
+      m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(0, m_scale / 2,  m_scale / 2)); 
+      m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f));
+      m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(0, - m_scale / 2, - m_scale / 2));
     }
     else{
       m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)); 
       m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(0, -m_scale / 2, m_scale / 2)); 
-      m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f)); // Após a rotação executada na linha 166, o eixo x deve apontar para a direção q ocorre o translado
+      m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f));
       m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(0, m_scale / 2, -m_scale / 2));
     }
 
