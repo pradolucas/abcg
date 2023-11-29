@@ -46,13 +46,12 @@ private:
 
   bool m_isMoving{false};
   float m_maxPos{1.0f};
-  float m_angleVelocity{360.0f}; //animation to move takes 1/4 of a second
+  float m_angleVelocity{360.0f};
   bool m_border{false};
 
   void move(float deltaTime);
   void translate();
   void resetAnimation();
-  
 };
 
 #endif

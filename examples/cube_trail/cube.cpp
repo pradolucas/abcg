@@ -163,40 +163,47 @@ void Cube::move(float deltaTime) {
     // RIGHT 90
     // UP  180
     // LEFT 270
-
-    if(m_planeface == PlaneFace::C_FRONT) {
-      m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(0.0f, 0.0f, 1.0f)); // Rotacionando o referencial
-      m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(0, -m_scale / 2 , -m_scale / 2)); 
-      m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f)); // Após a rotação executada na linha acima, o sentido anti-horário do eixo x deve apontar para a direção q ocorre o translado
-      m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(0, +m_scale / 2 , m_scale / 2)); 
+    switch (m_planeface) {
+        case PlaneFace::C_FRONT:
+          m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(0.0f, 0.0f, 1.0f)); // Rotacionando o referencial
+          m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(0, -m_scale / 2 , -m_scale / 2)); 
+          m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f)); // Após a rotação executada na linha acima, o sentido anti-horário do eixo x deve apontar para a direção q ocorre o translado
+          m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(0, +m_scale / 2 , m_scale / 2)); 
+          break;
+        case PlaneFace::C_REAR:
+          m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(270.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // Rotação alterando referencial para ter y normal a superfice
+          m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * -90.0f), glm::vec3(0.0f, 0.0f, 1.0f)); // atributo negativo não pode ser posicionado na determinação do eixo, i.e., -1.0f
+          m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(0, m_scale / 2,  m_scale / 2)); 
+          m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f));
+          m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(0, - m_scale / 2, - m_scale / 2));
+          break;
+        case PlaneFace::C_RIGHT:
+          m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(270.0f), glm::vec3(0.0f, 0.0f, 1.0f)); 
+          m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); 
+          m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(-m_scale / 2, 0, m_scale / 2)); 
+          m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(0.0f, -1.0f, 0.0f));
+          m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(m_scale / 2, 0, -m_scale / 2));
+          break;
+        case PlaneFace::C_LEFT:
+          m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.0f)); 
+          m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * -90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+          m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(m_scale / 2, 0 , m_scale / 2));
+          m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(0.0f, 1.0f, 0.0f));
+          m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(-m_scale / 2, 0, - m_scale / 2));
+          break;
+        case PlaneFace::C_BOTTOM:
+          m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+          m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(0, m_scale / 2, m_scale / 2)); 
+          m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(-m_angle), glm::vec3(1.0f, 0.0f, 0.0f)); // Rotação espelhada em x, em relação a C_UPPER
+          m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(0, -m_scale / 2, -m_scale / 2));
+          break;
+        case PlaneFace::C_UPPER:
+          m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)); 
+          m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(0, -m_scale / 2, m_scale / 2)); 
+          m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f));
+          m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(0, m_scale / 2, -m_scale / 2));
+          break;
     }
-    else if(m_planeface == PlaneFace::C_RIGHT) {
-      m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(270.0f), glm::vec3(0.0f, 0.0f, 1.0f)); 
-      m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); 
-      m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(-m_scale / 2, 0, m_scale / 2)); 
-      m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(0.0f, -1.0f, 0.0f));
-      m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(m_scale / 2, 0, -m_scale / 2));
-    }
-    else if(m_planeface == PlaneFace::C_REAR) {
-      m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(270.0f), glm::vec3(1.0f, 0.0f, 0.0f)); 
-      m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * -90.0f), glm::vec3(0.0f, 0.0f, 1.0f)); 
-      m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(0, m_scale / 2,  m_scale / 2)); 
-      m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f));
-      m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(0, - m_scale / 2, - m_scale / 2));
-    }
-    else{
-      m_animationMatrix = glm::rotate(glm::mat4{1.0f}, glm::radians(gsl::narrow_cast<int>(m_orientation) * 90.0f), glm::vec3(0.0f, 1.0f, 0.0f)); 
-      m_animationMatrix = glm::translate( m_animationMatrix, glm::vec3(0, -m_scale / 2, m_scale / 2)); 
-      m_animationMatrix = glm::rotate(m_animationMatrix, glm::radians(m_angle), glm::vec3(1.0f, 0.0f, 0.0f));
-      m_animationMatrix = glm::translate(m_animationMatrix, glm::vec3(0, m_scale / 2, -m_scale / 2));
-    }
-
-    // std::cout << "gsl::narrow_cast<int>(m_orientation) is: " <<
-    // gsl::narrow_cast<int>(m_orientation) << std::endl; std::cout <<
-    // "max_angle is: " << max_angle << std::endl; std::cout << "m_angle is: "
-    // << m_angle << std::endl; std::cout << "x,y,z is: " << m_position.x << " "
-    // << m_position.y << " " << m_position.z << std::endl;
-
   } else if (m_angle >=
              max_angle) { // Angle in [max_angle, +infinity) finish moviment
     translate();
