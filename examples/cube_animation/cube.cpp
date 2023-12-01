@@ -157,7 +157,6 @@ void Cube::move(float deltaTime) {
   if (m_angle >= 0.0f &&
       m_angle < max_angle) { // Angle in [0, max_angle) continue moving
     // Exclusivo para realizar a animação de rotação, não a translação
-    // increaseAngle(deltaTime * m_angleVelocity);
     m_angle += deltaTime * m_angleVelocity;
     // DOWN 0 
     // RIGHT 90

@@ -43,9 +43,9 @@ void Ground::create(GLuint program, GLint modelMatrixLoc, GLint colorLoc,
   m_N = N;
 }
 
-void Ground::drawTile(float angle, glm::vec3 axis, float xOffset, float yOffset,
-                      float zOffset, float factorX, float factorY,
-                      float factorZ) {
+void Ground::drawTile(float angle, glm::vec3 axis, 
+                      float xOffset, float yOffset, float zOffset,
+                      float factorX, float factorY, float factorZ) {
 
   for (auto const z : iter::range(-m_N, m_N + 1)) {
     for (auto const x : iter::range(-m_N, m_N + 1)) {
@@ -61,9 +61,10 @@ void Ground::drawTile(float angle, glm::vec3 axis, float xOffset, float yOffset,
       abcg::glUniformMatrix4fv(m_modelMatrixLoc, 1, GL_FALSE, &model[0][0]);
 
       // Set color (checkerboard pattern)
-      auto const gray{(z + x) % 2 == 0 ? 0.5f : 1.0f};
-      abcg::glUniform4f(m_colorLoc, gray, gray, gray, 1.0f);
+      auto const grey{(z + x) % 2 == 0 ? 0.5f : 1.0f};
+      abcg::glUniform4f(m_colorLoc, grey, grey, grey, 0.0f);
       // abcg::glUniform4f(m_colorLoc, 0.5f, 0.5f, 0.5f, 1.0f);
+      // abcg::glUniform4f(m_colorLoc, 0.36f, 0.26f, 0.56f, 0.8f); // RED | purple
       abcg::glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
   }

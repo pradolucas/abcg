@@ -4,8 +4,10 @@
 
 void Window::onEvent(SDL_Event const &event) {
   if (event.type == SDL_KEYDOWN) {
-    if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_UP)
+    if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_UP){
       m_cube.moveUp();
+      
+    }
     if (event.key.keysym.sym == SDLK_s || event.key.keysym.sym == SDLK_DOWN)
       m_cube.moveDown();
     if (event.key.keysym.sym == SDLK_a || event.key.keysym.sym == SDLK_LEFT)

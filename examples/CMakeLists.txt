@@ -1,3 +1,3 @@
-add_subdirectory(cube_trail)
+add_subdirectory(cube_animation)
 
 
