@@ -11,6 +11,8 @@ uniform float Ia, Id, Is;
 // Material properties
 uniform float Ka, Kd, Ks;
 
+uniform samplerCube cubeTex;
+
 in vec3 fragN;
 in vec3 fragV;
 out vec4 outColor;
