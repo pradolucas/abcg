@@ -64,7 +64,7 @@ Classe que compõe a superfície onde ocorre o translado do cubo menor.
 Classe resposável pela criação e movimentação realizada pelo cubo.
 
 - **loadObj**: Carrega o objeto `assets/box.obj`
-- **paint**:
+- **paint**: Atualiza o valor das variáveis e renderiza o cubo.
 - **update**: Atualiza chamando a função move passando o parâmentro `deltatime`.
 - **create**: Cria o VAO, VBO e EBO do Cubo, criando toda geometria, além de salvar a localização das variávies uniformes do programa de renderização.
 - **destroy**: Destroi VBO, VAO e EBO;
