@@ -15,6 +15,37 @@ protected:
   void onDestroy() override;
 
 private:
+  std::array<glm::vec3, 36> const m_skyPositions{{
+      // Front
+      {-2, -2, +2}, {+2, -2, +2}, {+2, +2, +2},
+      {-2, -2, +2}, {+2, +2, +2}, {-2, +2, +2},
+      // Back
+      {+2, -2, -2}, {-2, -2, -2}, {-2, +2, -2},
+      {+2, -2, -2}, {-2, +2, -2}, {+2, +2, -2},
+      // Right
+      {+2, -2, -2}, {+2, +2, -2}, {+2, +2, +2},
+      {+2, -2, -2}, {+2, +2, +2}, {+2, -2, +2},
+      // Left
+      {-2, -2, +2}, {-2, +2, +2}, {-2, +2, -2},
+      {-2, -2, +2}, {-2, +2, -2}, {-2, -2, -2},
+      // Top
+      {-2, +2, +2}, {+2, +2, +2}, {+2, +2, -2},
+      {-2, +2, +2}, {+2, +2, -2}, {-2, +2, -2},
+      // Bottom
+      {-2, -2, -2}, {+2, -2, -2}, {+2, -2, +2},
+      {-2, -2, -2}, {+2, -2, +2}, {-2, -2, +2}}};
+
+  std::string const m_skyShaderName{"skybox"};
+  GLuint m_skyVAO{};
+  GLuint m_skyVBO{};
+  GLuint m_skyProgram{};
+  GLuint m_skyTexture{};
+  void createSkybox();
+  void renderSkybox();
+  void loadSkyTexture(std::string const &path);
+  void destroySkybox() const;
+
+  
   glm::ivec2 m_viewportSize{600, 600};
   float m_scale{0.2f};
   int m_N{1}; // Número de tiles do chão, 2N+1 x 2N+1
