@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYwMXJkZHBhcXV6aDI4NHIzMTBqbGFpYjQ0MHYxM2o3bzk0eDljeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jBs92nCbLoZpnJkppb/giphy.gif" alt="animated" />
+</p>
+
 # Integrantes
 
 |RA|Nome|
